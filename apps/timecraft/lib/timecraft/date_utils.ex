@@ -4,7 +4,7 @@ defmodule Timecraft.DateUtils do
 
   def today(timezone \\ @timezone) do 
     DateTime.utc_now()
-    |> DateTime.shift_zone(timezone)
+    |> DateTime.shift_zone!(timezone)
     |> DateTime.to_date()
   end
 end

@@ -1,0 +1,21 @@
+<h1>
+  <%= link "<", to: Routes.tasks_path(@socket, :show, @date |> Date.add(-1) |> to_string()) %>
+  Tasks <%= @date %>
+  <%= link ">", to: Routes.tasks_path(@socket, :show, @date |> Date.add(1) |> to_string()) %>
+</h1>
+
+<ul>
+  <%= for task <- @tasks do %>
+    <li>
+      <%= task.due_time %>
+
+      <a href="https://todoist.com/showTask?id=<%= task.external_id %>" target="_blank">
+        <%= task.title %>
+      </a>
+
+      <%= if task.notes do %>
+        <ul><li><%= task.notes %></li></ul>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

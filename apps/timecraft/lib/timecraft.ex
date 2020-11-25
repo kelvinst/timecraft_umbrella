@@ -7,5 +7,7 @@ defmodule Timecraft do
   if it comes from the database, an external API or others.
   """
 
-  def tasks(date), do: TodoistAdapter.tasks(date)
+  alias Timecraft.TodoistAdapter
+
+  def tasks(date), do: TodoistAdapter.all_tasks_by_date(date)
 end

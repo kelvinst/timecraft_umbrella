@@ -40,6 +40,7 @@ defmodule Timecraft.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
+      {:tzdata, "~> 1.0"},
       {:todoixt, in_umbrella: true}
     ]
   end
