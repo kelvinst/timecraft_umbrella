@@ -8,6 +8,10 @@ defmodule Timecraft do
   """
 
   alias Timecraft.TodoistAdapter
+  alias Timecraft.TogglTrackAdapter
 
   def tasks(date), do: TodoistAdapter.all_tasks_by_date(date)
+
+  def resolve_time_entries_conflicts(date),
+    do: TogglTrackAdapter.resolve_time_entries_conflicts(date)
 end

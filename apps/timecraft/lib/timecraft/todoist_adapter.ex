@@ -1,6 +1,8 @@
 defmodule Timecraft.TodoistAdapter do
+  alias Timecraft.DatetimeUtils
   alias Timecraft.Task
 
+  # TODO - user config
   def token, do: System.get_env("TODOIST_TOKEN")
 
   def all_tasks_by_date(date) do
@@ -20,7 +22,7 @@ defmodule Timecraft.TodoistAdapter do
       external_id: item["id"],
       completed: item["completed"],
       title: title,
-      notes: notes, 
+      notes: notes,
       due_date: item |> get_in(~w(due date)) |> parse_date(),
       due_time: item |> get_in(~w(due datetime)) |> parse_time(get_in(item, ~w(due timezone))),
       order: item["order"]
@@ -34,17 +36,10 @@ defmodule Timecraft.TodoistAdapter do
 
   defp parse_time(nil, _), do: nil
 
-  defp parse_time(str, zone) when is_bitstring(str) do 
-    str 
-    |> from_iso8601!()
+  defp parse_time(str, zone) when is_bitstring(str) do
+    str
+    |> DatetimeUtils.from_iso8601!()
     |> DateTime.shift_zone!(zone)
     |> DateTime.to_time()
-  end
-
-  defp from_iso8601!(str) do
-    case DateTime.from_iso8601(str) do
-      {:ok, datetime, _} -> datetime
-      {:error, reason} -> raise "Error on DateTime.from_iso8601!/1, reason: #{reason}"
-    end
   end
 end

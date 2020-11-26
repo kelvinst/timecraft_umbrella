@@ -17,8 +17,8 @@ defmodule TimecraftWeb.Router do
   scope "/", TimecraftWeb do
     pipe_through :browser
 
-    live "/", TasksLive, :index
-    live "/:date", TasksLive, :show
+    live "/", DashboardLive, :index
+    live "/:date", DashboardLive, :show
   end
 
   # Other scopes may use custom stacks.

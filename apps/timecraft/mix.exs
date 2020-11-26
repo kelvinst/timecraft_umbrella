@@ -41,7 +41,8 @@ defmodule Timecraft.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
       {:tzdata, "~> 1.0"},
-      {:todoixt, in_umbrella: true}
+      {:todoixt, in_umbrella: true},
+      {:toggl_track, in_umbrella: true}
     ]
   end
 

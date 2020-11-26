@@ -1,4 +1,4 @@
-defmodule TimecraftWeb.TasksLive do
+defmodule TimecraftWeb.DashboardLive do
   use TimecraftWeb, :live_view
 
   alias Timecraft.DateUtils
@@ -16,7 +16,7 @@ defmodule TimecraftWeb.TasksLive do
 
   defp apply_action(socket, :show, %{"date" => str}) do
     date = Date.from_iso8601!(str)
-    
+
     socket
     |> assign(:page_title, "Tasks #{date}")
     |> assign(:date, date)
@@ -30,5 +30,11 @@ defmodule TimecraftWeb.TasksLive do
     |> assign(:page_title, "Tasks #{date}")
     |> assign(:date, date)
     |> assign(:tasks, Timecraft.tasks(date))
+  end
+
+  @impl true
+  def handle_event("resolve_time_entries_conflicts", _, socket) do
+    Timecraft.resolve_time_entries_conflicts(socket.assigns.date)
+    {:noreply, put_flash(socket, :success, "Time entries conflicts successfully resolved!")}
   end
 end

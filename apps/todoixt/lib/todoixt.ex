@@ -6,7 +6,7 @@ defmodule Todoixt do
   def all_tasks(token) do
     token
     |> client()
-    |> Tesla.get!("tasks?filter=view%20all")
+    |> Tesla.get!("tasks", query: [filter: "view all"])
     |> handle_result()
   end
 
