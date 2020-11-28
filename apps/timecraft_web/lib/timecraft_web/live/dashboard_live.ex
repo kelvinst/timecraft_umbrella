@@ -35,6 +35,6 @@ defmodule TimecraftWeb.DashboardLive do
   @impl true
   def handle_event("resolve_time_entries_conflicts", _, socket) do
     Timecraft.resolve_time_entries_conflicts(socket.assigns.date)
-    {:noreply, put_flash(socket, :success, "Time entries conflicts successfully resolved!")}
+    {:reply, %{}, put_flash(socket, :success, "Time entries conflicts successfully resolved!")}
   end
 end

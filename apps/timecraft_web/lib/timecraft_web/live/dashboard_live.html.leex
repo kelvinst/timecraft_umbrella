@@ -5,15 +5,15 @@
 </h1>
 
 <div class="row">
-  <ul class="column dashboard-column">
+  <ul class="column column-25 dashboard-column">
     <h2>Sources</h2>
   </ul>
 
-  <ul class="column dashboard-column">
+  <ul class="column column-25 dashboard-column">
     <h2>Tasks</h2>
 
     <%= for task <- @tasks do %>
-      <li>
+      <li class="task-card">
         <%= task.due_time %>
 
         <a href="https://todoist.com/showTask?id=<%= task.external_id %>" target="_blank">
@@ -27,11 +27,11 @@
     <% end %>
   </ul>
 
-  <ul class="column dashboard-column">
+  <ul class="column column-25 dashboard-column">
     <h2>Calendar</h2>
   </ul>
 
-  <ul class="column dashboard-column">
-    <h2>Time tracked <button phx-click="resolve_time_entries_conflicts">Resolve conflicts</button></h2>
+  <ul class="column column-25 dashboard-column">
+    <h2>Time tracked <button phx-click="resolve_time_entries_conflicts" phx-disable-with="Resolving conflicts...">Resolve conflicts</button></h2>
   </ul>
 </div>
