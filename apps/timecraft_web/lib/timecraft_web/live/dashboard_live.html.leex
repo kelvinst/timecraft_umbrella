@@ -13,7 +13,10 @@
     <h2>Tasks</h2>
 
     <%= for task <- @tasks do %>
-      <li class="task-card">
+      <li class="task-card" 
+          <%= if task.project do %>
+            style="border-left-color: <%= task.project.color %>"
+          <% end %>>
         <%= task.due_time %>
 
         <a href="https://todoist.com/showTask?id=<%= task.external_id %>" target="_blank">

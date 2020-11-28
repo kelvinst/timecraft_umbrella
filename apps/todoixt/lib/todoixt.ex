@@ -10,6 +10,13 @@ defmodule Todoixt do
     |> handle_result()
   end
 
+  def all_projects(token) do
+    token
+    |> client()
+    |> Tesla.get!("projects")
+    |> handle_result()
+  end
+
   defp client(token) do
     middlewares = [
       {Tesla.Middleware.BaseUrl, "https://api.todoist.com/rest/v1"},
