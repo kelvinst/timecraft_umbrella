@@ -32,7 +32,9 @@ defmodule Timecraft.TogglTrackAdapter do
 
   defp entries_to_update([x | [y | _] = rest], acc) do
     if DateTime.compare(x.stop, y.start) == :gt do
-      entries_to_update(rest, [%{id: x.id, stop: y.start} | acc])
+      entries_to_update(rest, [
+        %{id: x.id, stop: y.start, duration: DateTime.diff(y.start, x.start)} | acc
+      ])
     else
       entries_to_update(rest, acc)
     end
