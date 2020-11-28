@@ -1,0 +1,20 @@
+.dashboard-column {
+  list-style: none;
+}
+
+.task-card {
+  border: solid 1px grey;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0.5px 0.5px 1px grey;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    box-shadow: 1px 1px 2px grey;
+    cursor: grab;
+  }
+}

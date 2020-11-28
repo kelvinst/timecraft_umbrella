@@ -1,0 +1,37 @@
+<h1>
+  <%= link "<", to: Routes.dashboard_path(@socket, :show, @date |> Date.add(-1) |> to_string()) %>
+  <%= @date %>
+  <%= link ">", to: Routes.dashboard_path(@socket, :show, @date |> Date.add(1) |> to_string()) %>
+</h1>
+
+<div class="row">
+  <ul class="column column-25 dashboard-column">
+    <h2>Sources</h2>
+  </ul>
+
+  <ul class="column column-25 dashboard-column">
+    <h2>Tasks</h2>
+
+    <%= for task <- @tasks do %>
+      <li class="task-card">
+        <%= task.due_time %>
+
+        <a href="https://todoist.com/showTask?id=<%= task.external_id %>" target="_blank">
+          <%= task.title %>
+        </a>
+
+        <%# <%= if task.notes do %1> %>
+        <%#   <ul><li><%= task.notes %1></li></ul> %>
+        <%# <% end %1> %>
+      </li>
+    <% end %>
+  </ul>
+
+  <ul class="column column-25 dashboard-column">
+    <h2>Calendar</h2>
+  </ul>
+
+  <ul class="column column-25 dashboard-column">
+    <h2>Time tracked <button phx-click="resolve_time_entries_conflicts" phx-disable-with="Resolving conflicts...">Resolve conflicts</button></h2>
+  </ul>
+</div>
