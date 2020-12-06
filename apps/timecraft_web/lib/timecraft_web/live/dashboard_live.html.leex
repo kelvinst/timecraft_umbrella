@@ -1,7 +1,7 @@
 <h1>
-  <%= link "<", to: Routes.dashboard_path(@socket, :show, @date |> Date.add(-1) |> to_string()) %>
+  <%= live_patch "<", to: Routes.dashboard_path(@socket, :show, @date |> Date.add(-1) |> to_string()) %>
   <%= @date %>
-  <%= link ">", to: Routes.dashboard_path(@socket, :show, @date |> Date.add(1) |> to_string()) %>
+  <%= live_patch ">", to: Routes.dashboard_path(@socket, :show, @date |> Date.add(1) |> to_string()) %>
 </h1>
 
 <div class="row">
@@ -12,21 +12,25 @@
   <ul class="column column-25 dashboard-column">
     <h2>Tasks</h2>
 
-    <%= for task <- @tasks do %>
-      <li class="task-card" 
-          <%= if task.project do %>
-            style="border-left-color: <%= task.project.color %>"
-          <% end %>>
-        <%= task.due_time %>
+    <%= if is_list(@tasks) do %>
+      <%= for task <- @tasks do %>
+        <li class="task-card" 
+            <%= if task.project do %>
+              style="border-left-color: <%= task.project.color %>"
+            <% end %>>
+          <%= task.due_time %>
 
-        <a href="https://todoist.com/showTask?id=<%= task.external_id %>" target="_blank">
-          <%= task.title %>
-        </a>
+          <a href="https://todoist.com/showTask?id=<%= task.external_id %>" target="_blank">
+            <%= task.title %>
+          </a>
 
-        <%# <%= if task.notes do %1> %>
-        <%#   <ul><li><%= task.notes %1></li></ul> %>
-        <%# <% end %1> %>
-      </li>
+          <%# <%= if task.notes do %1> %>
+          <%#   <ul><li><%= task.notes %1></li></ul> %>
+          <%# <% end %1> %>
+        </li>
+      <% end %>
+    <% else %>
+      Loading...
     <% end %>
   </ul>
 
